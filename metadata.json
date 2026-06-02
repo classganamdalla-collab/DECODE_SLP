@@ -1,0 +1,28 @@
+{
+  "labels": [
+    "안녕하세요",
+    "아메리카노",
+    "뜨거운",
+    "아이스",
+    "2잔",
+    "주세요",
+    "제일",
+    "큰걸로",
+    "해주세요",
+    "테이크아웃",
+    "포인트",
+    "카드",
+    "영수증",
+    "감사합니다",
+    "와이파이",
+    "있나요"
+  ],
+  "num_classes": 16,
+  "max_sequence_length": 100,
+  "feature_dim": 90,
+  "training_samples": 2944,
+  "validation_samples": 184,
+  "final_accuracy": 0.9959239363670349,
+  "final_val_accuracy": 0.989130437374115,
+  "normalization": "relative"
+}

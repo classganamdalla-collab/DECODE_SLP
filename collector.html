@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>수어 표본 수집기</title>
+  <link rel="stylesheet" href="collector.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="sidebar">
+      <div class="logo">
+        <span class="logo-icon">🤟</span>
+        <div>
+          <div class="logo-title">수어 AAC</div>
+          <div class="logo-sub">표본 수집기</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">상황</div>
+        <div id="situationBadge" class="situation-badge">로딩 중...</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">라벨 선택</div>
+        <div id="labelGrid" class="label-grid">
+          <!-- labels.json 에서 자동 생성 -->
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">메모 (선택)</div>
+        <input type="text" id="sampleNote" class="note-input" placeholder="예: 앉은 자세 / 1회차" />
+      </div>
+
+      <div class="section">
+        <div class="section-title">기록</div>
+        <div class="btn-group">
+          <button id="startRecordBtn" class="btn btn-primary">● 기록 시작</button>
+          <button id="stopRecordBtn" class="btn btn-danger">■ 기록 종료</button>
+          <button id="autoRepeatBtn" class="btn btn-ghost">🔁 연속 모드 OFF</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">표본 관리</div>
+        <div class="btn-group">
+          <button id="deleteLastBtn" class="btn btn-ghost">↩ 마지막 삭제</button>
+          <button id="exportJsonBtn" class="btn btn-secondary">JSON 내보내기</button>
+          <button id="mergeJsonBtn" class="btn btn-secondary">JSON 병합</button>
+          <button id="clearSamplesBtn" class="btn btn-ghost">전체 삭제</button>
+        </div>
+        <input type="file" id="mergeFileInput" accept=".json" multiple style="display:none" />
+      </div>
+
+      <div class="stats-box">
+        <div id="cameraStatus"     class="stat-line">📷 카메라 준비 중...</div>
+        <div id="handStatus"       class="stat-line">✋ 손 감지 확인 중...</div>
+        <div id="recordStatus"     class="stat-line rec-idle">⏺ 대기 중</div>
+        <div id="frameCountStatus" class="stat-line">프레임: 0</div>
+        <div id="sampleCountStatus"class="stat-line">저장된 표본: 0개</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="video-wrap">
+        <video id="webcam" autoplay playsinline muted></video>
+        <canvas id="outputCanvas"></canvas>
+        <div class="video-hud">
+          <div id="hudLabel"  class="hud-label">라벨 미선택</div>
+          <div id="hudRecord" class="hud-record hidden">● REC</div>
+        </div>
+      </div>
+
+      <div class="samples-section">
+        <div class="samples-header">
+          <span>저장된 표본</span>
+          <div id="labelSummary" class="label-summary"></div>
+        </div>
+        <div id="samplesList" class="samples-list">
+          아직 저장된 표본이 없습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="collector.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이음</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ① 시작 화면 -->
+    <div id="startScreen" class="start-screen">
+      <div class="start-content">
+        <img src="assets/logo.png" class="start-logo-img" alt="이음 로고">
+        <div class="start-tagline">수어를 잇다</div>
+        <button id="launchBtn" class="launch-btn" disabled>불러오는 중...</button>
+        <div class="start-notice">카메라 권한이 필요합니다</div>
+      </div>
+    </div>
+
+    <!-- ② 메인 화면 -->
+    <div id="mainApp" class="main-app hidden">
+      <video id="webcam" autoplay playsinline muted></video>
+      <canvas id="outputCanvas"></canvas>
+
+      <!-- 상단 HUD -->
+      <div class="top-hud">
+        <div class="hud-brand" id="brandBtn">
+          <img src="assets/logo.png" class="brand-logo" alt="이음">
+          <span class="brand-name">이음</span>
+        </div>
+        <div class="hud-center">
+          <span id="statusDot" class="status-dot"></span>
+          <span id="runStatus" class="status-text">대기 중</span>
+        </div>
+        <div class="hud-controls">
+          <button id="speakSentenceBtn" class="hud-btn accent auto-mode" title="클릭: 즉시 읽기 / 더블클릭: 자동↔수동 전환">🔊 자동</button>
+          <button id="listenBtn"        class="hud-btn secondary">🎤 듣기</button>
+          <button id="clearSentenceBtn" class="hud-btn ghost">✕</button>
+        </div>
+      </div>
+
+      <!-- 상대방 음성 패널 -->
+      <div id="speechPanel" class="speech-panel hidden">
+        <div class="panel-block">
+          <div class="panel-label">🎤 상대방</div>
+          <div id="speechFinal"   class="speech-final"></div>
+          <div id="speechInterim" class="speech-interim"></div>
+          <button id="clearSpeechBtn" class="speech-clear-btn">지우기</button>
+        </div>
+      </div>
+
+      <!-- 우측 패널 -->
+      <div class="right-panel">
+        <div class="panel-block status-block">
+          <div id="cameraStatus" class="info-line">카메라 준비 중...</div>
+          <div id="handStatus"   class="info-line">손 감지 확인 중...</div>
+        </div>
+        <div class="panel-block result-block">
+          <div class="panel-label">현재 인식</div>
+          <div id="currentPrediction" class="big-word">—</div>
+          <div id="predictionScore"   class="score-text">신뢰도: —</div>
+          <div id="holdBar" class="hold-bar-wrap">
+            <div id="holdBarFill" class="hold-bar-fill"></div>
+          </div>
+          <div id="holdStatus" class="hold-text">안정화 대기 중</div>
+        </div>
+      </div>
+
+      <!-- 하단 영역 -->
+      <div class="bottom-area">
+        <div class="bottom-bar">
+          <div id="sentenceOutput" class="sentence-output">
+            <span class="sentence-empty">수어로 단어를 추가해보세요</span>
+          </div>
+          <button id="addWordBtn" class="add-word-btn" title="단어 수동 추가 (더블클릭: 자동↔수동)">+</button>
+        </div>
+        <button id="startBtn" class="start-fab" title="인식 시작">▶</button>
+      </div>
+
+      <!-- JS 참조용 숨김 요소 -->
+      <div id="datasetStatus" style="display:none"></div>
+      <div id="labelChips"    style="display:none"></div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
